@@ -1,0 +1,17 @@
+.app-container {
+  display: flex;
+}
+
+.sidebar-container {
+  width: 20vw;
+  height: 100vh;
+}
+
+.filters-container {
+  width: 25vw;
+  height: 100vh;
+}
+
+.property-contianer {
+  width: 55vw;
+}
