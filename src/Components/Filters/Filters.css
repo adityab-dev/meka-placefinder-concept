@@ -1,0 +1,164 @@
+.filters-user {
+  font-size: 2rem;
+  font-weight: 600;
+
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.filters-date {
+  font-size: 1.25rem;
+  color: rgb(180, 180, 180);
+
+  margin-bottom: 1.15rem;
+}
+
+.filters-location-label {
+  font-size: 1.1rem;
+  color: gray;
+  font-weight: 500;
+}
+
+.filters-heading {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 1.15rem;
+}
+
+.filters-location-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters-location-container > * {
+  margin-bottom: 1rem;
+}
+
+.filters-location-container > select {
+  width: 80%;
+  height: 2.5rem;
+
+  text-indent: 0.8rem;
+  font-size: 1rem;
+
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 6px;
+}
+
+.filters-categories {
+  display: inline-block;
+  align-items: center;
+
+  width: 50%;
+
+  font-size: 1rem;
+}
+
+.filters-categories > input {
+  margin-right: 0.65rem;
+  margin-bottom: 0.6rem;
+
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+.filters-categories > label {
+  font-size: 1.15rem;
+
+  padding-bottom: 0.6rem;
+}
+
+.filters-category-heading {
+  margin: 0;
+  margin-bottom: 1rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: gray;
+}
+
+.filters-category-range {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 1rem;
+}
+
+.filters-category-range > input {
+  width: 80%;
+}
+
+.filtes-category-size {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters-category-size-checkbox-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.filters-category-size-container {
+  display: flex;
+
+  border: 1px solid lightgray;
+  border-radius: 6px;
+
+  width: 40%;
+  height: 2.45rem;
+}
+
+.filters-category-size-container > * {
+  height: inherit;
+}
+
+.filters-category-size-container > input {
+  border: none;
+  border-radius: 6px;
+
+  padding: 0;
+  padding-right: 1rem;
+
+  width: 80%;
+
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.filters-category-size-container > input::placeholder {
+  color: gray;
+  font-size: 0.9rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.filters-size-txt {
+  padding-left: 0.45rem;
+
+  display: flex;
+  align-items: center;
+}
+
+.filters-size-space-evenly {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#label-size {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.filter-category-container {
+  margin-bottom: 1rem;
+}
+
+.filtres-category-size {
+  margin-bottom: 1rem;
+}
