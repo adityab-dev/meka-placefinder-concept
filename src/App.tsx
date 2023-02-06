@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
   return (
-    <main className="app-container flex">
+    <main className="app-container">
       <div className="sidebar-container">
         <Sidebar />
       </div>

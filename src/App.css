@@ -3,15 +3,22 @@
 }
 
 .sidebar-container {
-  width: 20vw;
+  width: 16.5vw;
   height: 100vh;
+
+  margin-right: 1.25rem;
+
+  border-right: 1px solid lightgray;
 }
 
 .filters-container {
-  width: 25vw;
+  width: 27.5vw;
   height: 100vh;
+
+  display: flex;
+  justify-content: center;
 }
 
 .property-contianer {
-  width: 55vw;
+  width: 56vw;
 }
