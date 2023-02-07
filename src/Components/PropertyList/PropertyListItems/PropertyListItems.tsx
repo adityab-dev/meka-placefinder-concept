@@ -3,13 +3,18 @@ import map_icon from "../../../Assets/map-icon.png";
 import { useAppSelector } from "../../../store/hooks/hooks";
 
 function PropertyListItems() {
-  const locations = useAppSelector((state) => state.locations.locations);
+  const filteredLocations = useAppSelector(
+    (state) => state.locations.filteredLocations
+  );
 
   return (
     <>
-      {locations.map((location) => {
+      {filteredLocations.map((location) => {
         return (
-          <div className="prop-card-container-center">
+          <div
+            className="prop-card-container-center"
+            key={location.id}
+          >
             <div className="props-card-container">
               <div className="props-card-img-bg">
                 <img
