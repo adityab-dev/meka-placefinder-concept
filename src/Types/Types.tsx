@@ -1,3 +1,5 @@
+import React from "react";
+
 export type Location = {
   id: number;
   name: string;
@@ -22,4 +24,13 @@ export type InitialLocationsState = {
   locations: Location[];
   filters: Filters;
   filteredLocations: Location[];
+  totalResults: number;
+};
+
+export type OnChange = React.ChangeEvent<HTMLInputElement>;
+
+export type InputInteractionPayloadType = {
+  name: string;
+  value: string;
+  checked: boolean;
 };
