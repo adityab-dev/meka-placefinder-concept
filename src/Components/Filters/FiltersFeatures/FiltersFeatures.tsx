@@ -1,39 +1,32 @@
-export default function FiltersFeatures() {
+import { featuresValues } from "../../../constants/filter-type-values";
+
+import { features } from "../../../constants/input-names";
+
+import { inputChangeHandler } from "../../../helper-functions/helper-functions";
+
+function FiltersFeatures() {
   return (
     <div className="filter-category-container">
       <h4 className="filters-category-heading">Feaures</h4>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Ac & Heating</label>
-      </div>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Clubhouse</label>
-      </div>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Dish Washer</label>
-      </div>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Spa</label>
-      </div>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Balcony</label>
-      </div>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Pool</label>
-      </div>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Fitness Centre</label>
-      </div>
-      <div className="filters-categories">
-        <input type="checkbox" />
-        <label>Valet Parking</label>
-      </div>
+      {featuresValues.map((value) => {
+        return (
+          <div
+            className="filters-categories"
+            key={value}
+          >
+            <input
+              type="checkbox"
+              value={value}
+              id={value}
+              name={features}
+              onChange={(event) => inputChangeHandler(event)}
+            />
+            <label htmlFor={value}>{value}</label>
+          </div>
+        );
+      })}
     </div>
   );
 }
+
+export default FiltersFeatures;
