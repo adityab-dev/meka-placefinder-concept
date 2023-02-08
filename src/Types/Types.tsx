@@ -13,11 +13,20 @@ export type Location = {
   features: string;
 };
 
+export type Price = [number, number];
+
 export type Filters = {
   type: string[];
   features: string[];
   style: string[];
-  price: string;
+  price: Price;
+};
+
+export type ShowLocation = {
+  lat: number;
+  lng: number;
+  show: boolean;
+  id: number;
 };
 
 export type InitialLocationsState = {
@@ -25,6 +34,7 @@ export type InitialLocationsState = {
   filters: Filters;
   filteredLocations: Location[];
   totalResults: number;
+  showLocation: ShowLocation;
 };
 
 export type OnChange = React.ChangeEvent<HTMLInputElement>;
@@ -34,3 +44,10 @@ export type InputInteractionPayloadType = {
   value: string;
   checked: boolean;
 };
+
+export type PriceChangePayloadType = {
+  name: string;
+  value: string;
+};
+
+export type Values = [number, number];

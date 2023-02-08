@@ -172,3 +172,15 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 } */
+
+.leaflet-container {
+  width: 25vw;
+  height: 40rem;
+
+  border-radius: 20px;
+}
+
+.map-window-map {
+  width: 25vw;
+  height: 40rem;
+}

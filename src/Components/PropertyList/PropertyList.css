@@ -160,3 +160,15 @@
   justify-content: flex-start;
   align-items: center;
 }
+
+.box-shadow {
+  -webkit-box-shadow: 10px 10px 15px -7px rgba(0, 0, 0, 0.99);
+  -moz-box-shadow: 10px 10px 15px -7px rgba(0, 0, 0, 0.99);
+  box-shadow: 10px 10px 15px -7px rgba(0, 0, 0, 0.99);
+
+  transition: all 0.3s ease;
+}
+
+.remove-box-shadow {
+  transition: all 0.3s ease;
+}

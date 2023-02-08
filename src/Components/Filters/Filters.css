@@ -60,6 +60,8 @@
 
   height: 1.1rem;
   width: 1.1rem;
+
+  accent-color: green;
 }
 
 .filters-categories > label {
@@ -161,4 +163,38 @@ input::-webkit-inner-spin-button {
 
 .filtres-category-size {
   margin-bottom: 1rem;
+}
+
+.range-markers-container {
+  display: flex;
+  justify-content: space-between;
+
+  width: 75%;
+
+  font-size: 0.95rem;
+  color: rgb(129, 129, 129);
+}
+
+/* #range-markers {
+  font-size: 1rem;
+  color: rgb(185, 185, 185);
+
+  display: flex;
+  justify-content: space-between;
+
+  width: 82.5%;
+} */
+
+.range-inputs {
+  display: flex;
+}
+
+.range-inputs > input[type="range"] {
+  margin: 0;
+
+  accent-color: green;
+}
+
+.range-inputs > input[type="range"]:nth-child(2) {
+  margin-left: -0.25rem;
 }

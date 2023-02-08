@@ -3,27 +3,26 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import DUMMY_DATA from "../../Assets/dummyData";
 import { all } from "../../constants/filter-type-values";
 
-import { type, features, style, price } from "../../constants/input-names";
-// import {
-//   all,
-//   apartment,
-//   house,
-//   office,
-//   shop,
-//   building,
-// } from "../../constants/filter-type-values";
+import {
+  type,
+  features,
+  style,
+  lowerLimit,
+  upperLimit,
+} from "../../constants/input-names";
 
 import {
   Filters,
   InitialLocationsState,
   InputInteractionPayloadType,
+  PriceChangePayloadType,
 } from "../../Types/Types";
 
 const initialFilters: Filters = {
   features: [],
   style: [],
   type: [],
-  price: "0",
+  price: [0, 100],
 };
 
 const initialLocationsState: InitialLocationsState = {
@@ -31,6 +30,7 @@ const initialLocationsState: InitialLocationsState = {
   filters: initialFilters,
   filteredLocations: [],
   totalResults: 0,
+  showLocation: { lat: 0, lng: 0, show: false, id: NaN },
 };
 
 const locationsSlice = createSlice({
@@ -56,13 +56,28 @@ const locationsSlice = createSlice({
             1
           );
       }
-      if (name === price) state.filters.price = value;
     },
+
+    onPriceChange(state, action: PayloadAction<PriceChangePayloadType>) {
+      const { name, value } = action.payload;
+
+      const isValid = name === lowerLimit || name === upperLimit;
+
+      if (isValid) {
+        if (name === lowerLimit) state.filters.price[0] = +value;
+        if (name === upperLimit) state.filters.price[1] = +value;
+      }
+    },
+
     onFiltersChange(state) {
       const { style, features, type, price } = state.filters;
 
       const onStart =
-        !type.length && !features.length && !style.length && !+price;
+        !type.length &&
+        !features.length &&
+        !style.length &&
+        price[0] === 0 &&
+        price[1] === 100;
 
       if (onStart) {
         state.filteredLocations = state.locations;
@@ -78,7 +93,7 @@ const locationsSlice = createSlice({
         );
 
         const filteredPrice = locations.filter(
-          (location) => +price >= location.price
+          (location) => price[0] < location.price && location.price < price[1]
         );
 
         let filteredType = [];
@@ -140,8 +155,27 @@ const locationsSlice = createSlice({
 
       state.totalResults = state.filteredLocations.length;
     },
+    onCardClick(state, action: PayloadAction<number>) {
+      const id = action.payload;
+
+      if (id === state.showLocation.id && state.showLocation.show === true)
+        state.showLocation.show = false;
+      else if (id !== state.showLocation.id) {
+        const [{ latitude, longitude }] = state.locations.filter(
+          (location) => location.id === id
+        );
+
+        state.showLocation = { lat: latitude, lng: longitude, show: true, id };
+      } else if (
+        id === state.showLocation.id &&
+        state.showLocation.show === false
+      ) {
+        state.showLocation.show = true;
+      }
+    },
   },
 });
 
-export const { inputInteraction, onFiltersChange } = locationsSlice.actions;
+export const { inputInteraction, onFiltersChange, onPriceChange, onCardClick } =
+  locationsSlice.actions;
 export default locationsSlice.reducer;
