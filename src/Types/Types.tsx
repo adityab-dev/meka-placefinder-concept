@@ -51,3 +51,8 @@ export type PriceChangePayloadType = {
 };
 
 export type Values = [number, number];
+
+export type RangeWidthPayloadType = {
+  currentLowerValue: number;
+  currentUpperValue: number;
+};

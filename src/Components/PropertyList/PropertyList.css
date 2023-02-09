@@ -153,12 +153,27 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 275px;
+
+  height: 80vh;
+  width: 100%;
+
+  overflow-y: scroll;
+}
+
+.property-list-grid-onMap {
+  grid-template-columns: 0.9fr;
+
+  width: 35%;
+
+  margin-right: 2rem;
 }
 
 .prop-card-container-center {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  margin-right: 1.25rem;
 }
 
 .box-shadow {
@@ -171,4 +186,17 @@
 
 .remove-box-shadow {
   transition: all 0.3s ease;
+}
+
+.property-map-window-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.map-width {
+  width: 35%;
+}
+
+.grid-width {
+  width: 65%;
 }

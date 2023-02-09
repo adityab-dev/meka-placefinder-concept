@@ -169,10 +169,12 @@ input::-webkit-inner-spin-button {
   display: flex;
   justify-content: space-between;
 
-  width: 75%;
+  width: 80%;
 
   font-size: 0.95rem;
   color: rgb(129, 129, 129);
+
+  margin-top: 0.5rem;
 }
 
 /* #range-markers {
@@ -197,4 +199,8 @@ input::-webkit-inner-spin-button {
 
 .range-inputs > input[type="range"]:nth-child(2) {
   margin-left: -0.25rem;
+}
+
+#lowerLimit {
+  transform: rotateY(180deg);
 }

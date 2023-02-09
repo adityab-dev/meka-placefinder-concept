@@ -3,13 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import DUMMY_DATA from "../../Assets/dummyData";
 import { all } from "../../constants/filter-type-values";
 
-import {
-  type,
-  features,
-  style,
-  lowerLimit,
-  upperLimit,
-} from "../../constants/input-names";
+import { type, features, style, lowerLimit, upperLimit } from "../../constants/input-names";
 
 import {
   Filters,
@@ -25,22 +19,21 @@ const initialFilters: Filters = {
   price: [0, 100],
 };
 
+const initialShowLocation = { lat: 0, lng: 0, show: false, id: NaN };
+
 const initialLocationsState: InitialLocationsState = {
   locations: DUMMY_DATA,
   filters: initialFilters,
   filteredLocations: [],
   totalResults: 0,
-  showLocation: { lat: 0, lng: 0, show: false, id: NaN },
+  showLocation: initialShowLocation,
 };
 
 const locationsSlice = createSlice({
   initialState: initialLocationsState,
   name: "Locations",
   reducers: {
-    inputInteraction(
-      state,
-      action: PayloadAction<InputInteractionPayloadType>
-    ) {
+    inputInteraction(state, action: PayloadAction<InputInteractionPayloadType>) {
       const { name, value, checked } = action.payload;
 
       const isValid = name === type || name === features || name === style;
@@ -50,9 +43,7 @@ const locationsSlice = createSlice({
 
         if (!checked)
           state.filters[name].splice(
-            state.filters[name].findIndex(
-              (filterValue) => filterValue === value
-            ),
+            state.filters[name].findIndex((filterValue) => filterValue === value),
             1
           );
       }
@@ -73,20 +64,14 @@ const locationsSlice = createSlice({
       const { style, features, type, price } = state.filters;
 
       const onStart =
-        !type.length &&
-        !features.length &&
-        !style.length &&
-        price[0] === 0 &&
-        price[1] === 100;
+        !type.length && !features.length && !style.length && price[0] === 0 && price[1] === 100;
 
       if (onStart) {
         state.filteredLocations = state.locations;
       } else {
         const locations = state.locations;
 
-        const filteredStyles = locations.filter((location) =>
-          style.includes(location.style)
-        );
+        const filteredStyles = locations.filter((location) => style.includes(location.style));
 
         const filteredFeatures = locations.filter((location) =>
           features.includes(location.features)
@@ -100,17 +85,10 @@ const locationsSlice = createSlice({
 
         if (type.includes(all)) filteredType = state.locations;
         else {
-          filteredType = locations.filter((location) =>
-            type.includes(location.type)
-          );
+          filteredType = locations.filter((location) => type.includes(location.type));
         }
 
-        const arrOfFilterArr = [
-          filteredFeatures,
-          filteredPrice,
-          filteredStyles,
-          filteredType,
-        ];
+        const arrOfFilterArr = [filteredFeatures, filteredPrice, filteredStyles, filteredType];
 
         let arrayOfIds: Array<number> = [];
         let numOfFilters = 0;
@@ -146,30 +124,24 @@ const locationsSlice = createSlice({
           return null;
         });
 
-        const filteredLocations = locations.filter((location) =>
-          filteredIds.includes(location.id)
-        );
+        const filteredLocations = locations.filter((location) => filteredIds.includes(location.id));
 
         state.filteredLocations = filteredLocations;
       }
 
       state.totalResults = state.filteredLocations.length;
     },
+
     onCardClick(state, action: PayloadAction<number>) {
       const id = action.payload;
 
       if (id === state.showLocation.id && state.showLocation.show === true)
         state.showLocation.show = false;
       else if (id !== state.showLocation.id) {
-        const [{ latitude, longitude }] = state.locations.filter(
-          (location) => location.id === id
-        );
+        const [{ latitude, longitude }] = state.locations.filter((location) => location.id === id);
 
         state.showLocation = { lat: latitude, lng: longitude, show: true, id };
-      } else if (
-        id === state.showLocation.id &&
-        state.showLocation.show === false
-      ) {
+      } else if (id === state.showLocation.id && state.showLocation.show === false) {
         state.showLocation.show = true;
       }
     },

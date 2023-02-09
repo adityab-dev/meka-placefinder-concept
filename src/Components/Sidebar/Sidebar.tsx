@@ -3,13 +3,21 @@ import buy from "../../Assets/buy-img.png";
 import sell from "../../Assets/sell-img.png";
 import rent from "../../Assets/rent-img.png";
 import settings from "../../Assets/settings-img.png";
+import logout_logo from "../../Assets/logout-icon.png";
 
 import "./Sidebar.css";
+import { useAppSelector } from "../../store/hooks/hooks";
 
 function Sidebar() {
+  const show = useAppSelector((state) => state.locations.showLocation.show);
+
   return (
     <div className="sidebar-contaner-width-height">
-      <div className="sidebar-profile-empty-div default-grey-bg flex">
+      <div
+        className={`sidebar-profile-empty-div default-grey-bg flex ${
+          show ? "sidebar-profile-empty-div-small" : null
+        }`}
+      >
         <img
           src={profile}
           alt="profile"
@@ -19,13 +27,13 @@ function Sidebar() {
       <input
         type="text"
         placeholder="Search"
-        className="sidebar-search"
+        className={`sidebar-search ${show ? "display-none" : null}`}
       />
 
-      <section className="sidebar-middle-section">
-        <div className="sidebar-items">Menu</div>
+      <section className={`sidebar-middle-section ${show ? "margin-remove" : null}`}>
+        <div className={`sidebar-items ${show ? "justify-center" : null}`}>Menu</div>
 
-        <div className="sidebar-items">
+        <div className={`sidebar-items ${show ? "justify-center" : null}`}>
           <img
             src={buy}
             alt="buy-icon"
@@ -34,14 +42,14 @@ function Sidebar() {
           />
           <label
             htmlFor="buy"
-            className="sidebar-items-margin-right"
+            className={`sidebar-items-margin-right ${show ? "display-none" : null}`}
             style={{ color: "green" }}
           >
             Buy
           </label>
         </div>
 
-        <div className="sidebar-items">
+        <div className={`sidebar-items ${show ? "justify-center" : null}`}>
           <img
             id="sell"
             src={sell}
@@ -50,13 +58,13 @@ function Sidebar() {
           />
           <label
             htmlFor="sell"
-            className="sidebar-items-margin-right"
+            className={`sidebar-items-margin-right ${show ? "display-none" : null}`}
           >
             Sell
           </label>
         </div>
 
-        <div className="sidebar-items">
+        <div className={`sidebar-items ${show ? "justify-center" : null}`}>
           <img
             id="rent"
             src={rent}
@@ -65,13 +73,13 @@ function Sidebar() {
           />
           <label
             htmlFor="rent"
-            className="sidebar-items-margin-right"
+            className={`sidebar-items-margin-right ${show ? "display-none" : null}`}
           >
             Rent
           </label>
         </div>
 
-        <div className="sidebar-items">
+        <div className={`sidebar-items ${show ? "justify-center" : null}`}>
           <img
             id="compare"
             src={buy}
@@ -80,13 +88,13 @@ function Sidebar() {
           />
           <label
             htmlFor="compare"
-            className="sidebar-items-margin-right"
+            className={`sidebar-items-margin-right ${show ? "display-none" : null}`}
           >
             Compare
           </label>
         </div>
 
-        <div className="sidebar-items">
+        <div className={`sidebar-items ${show ? "justify-center" : null}`}>
           <img
             id="settings"
             src={settings}
@@ -95,7 +103,7 @@ function Sidebar() {
           />
           <label
             htmlFor="settings"
-            className="sidebar-items-margin-right"
+            className={`sidebar-items-margin-right ${show ? "display-none" : null}`}
           >
             Settings
           </label>
@@ -104,8 +112,13 @@ function Sidebar() {
 
       <button
         type="button"
-        className="sidebar-logout-btn"
+        className={`sidebar-logout-btn ${show ? "margin-remove button-small" : null}`}
       >
+        <img
+          src={logout_logo}
+          alt="logout"
+          className={`${show ? "display-none" : null}`}
+        />
         Logout
       </button>
     </div>

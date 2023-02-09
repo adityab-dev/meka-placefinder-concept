@@ -5,11 +5,7 @@ import {
   onPriceChange,
 } from "../store/slices/locations-slice";
 
-import {
-  OnChange,
-  InputInteractionPayloadType,
-  PriceChangePayloadType,
-} from "../Types/Types";
+import { OnChange, InputInteractionPayloadType, PriceChangePayloadType } from "../Types/Types";
 
 import store from "../store/store/store";
 const { dispatch } = store;

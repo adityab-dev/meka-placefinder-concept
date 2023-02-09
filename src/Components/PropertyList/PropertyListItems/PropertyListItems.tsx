@@ -4,9 +4,7 @@ import { cardClickHandler } from "../../../helper-functions/helper-functions";
 import { useAppSelector } from "../../../store/hooks/hooks";
 
 function PropertyListItems() {
-  const filteredLocations = useAppSelector(
-    (state) => state.locations.filteredLocations
-  );
+  const filteredLocations = useAppSelector((state) => state.locations.filteredLocations);
 
   const { id, show } = useAppSelector((state) => state.locations.showLocation);
 

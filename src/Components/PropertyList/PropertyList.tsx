@@ -3,10 +3,14 @@ import "./PropertyList.css";
 import bell from "../../Assets/bell.png";
 import profile_img_small from "../../Assets/profile-img-small.png";
 import PropertyListItems from "./PropertyListItems/PropertyListItems";
+
 import { useAppSelector } from "../../store/hooks/hooks";
+
+import MapWindow from "../Map/Map";
 
 function PropertyList() {
   const totalResults = useAppSelector((state) => state.locations.totalResults);
+  const show = useAppSelector((state) => state.locations.showLocation.show);
   return (
     <div>
       <div className="prop-empty-div">
@@ -32,8 +36,11 @@ function PropertyList() {
         <div className="prop-398">{totalResults} Results</div>
         <div className="prop-scot">in Scotland</div>
       </div>
-      <div className="property-list-grid">
-        <PropertyListItems />
+      <div className={`property-map-window-container`}>
+        <div className={`property-list-grid ${show ? "property-list-grid-onMap" : null}`}>
+          <PropertyListItems />
+        </div>
+        {show ? <MapWindow /> : null}
       </div>
     </div>
   );
