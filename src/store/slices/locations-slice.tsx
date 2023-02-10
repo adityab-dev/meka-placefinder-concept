@@ -3,7 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import DUMMY_DATA from "../../Assets/dummyData";
 import { all } from "../../constants/filter-type-values";
 
-import { type, features, style, lowerLimit, upperLimit } from "../../constants/input-names";
+import {
+  type,
+  features,
+  style,
+  lowerLimit,
+  upperLimit,
+} from "../../constants/input-names";
 
 import {
   Filters,
@@ -33,17 +39,22 @@ const locationsSlice = createSlice({
   initialState: initialLocationsState,
   name: "Locations",
   reducers: {
-    inputInteraction(state, action: PayloadAction<InputInteractionPayloadType>) {
+    inputInteraction(
+      state,
+      action: PayloadAction<InputInteractionPayloadType>
+    ) {
       const { name, value, checked } = action.payload;
+
+      const { filters } = state;
 
       const isValid = name === type || name === features || name === style;
 
       if (isValid) {
-        if (checked) state.filters[name].push(value);
+        if (checked) filters[name].push(value);
 
         if (!checked)
-          state.filters[name].splice(
-            state.filters[name].findIndex((filterValue) => filterValue === value),
+          filters[name].splice(
+            filters[name].findIndex((filterValue) => filterValue === value),
             1
           );
       }
@@ -52,11 +63,13 @@ const locationsSlice = createSlice({
     onPriceChange(state, action: PayloadAction<PriceChangePayloadType>) {
       const { name, value } = action.payload;
 
+      const { filters } = state;
+
       const isValid = name === lowerLimit || name === upperLimit;
 
       if (isValid) {
-        if (name === lowerLimit) state.filters.price[0] = +value;
-        if (name === upperLimit) state.filters.price[1] = +value;
+        if (name === lowerLimit) filters.price[0] = +value;
+        if (name === upperLimit) filters.price[1] = +value;
       }
     },
 
@@ -64,14 +77,20 @@ const locationsSlice = createSlice({
       const { style, features, type, price } = state.filters;
 
       const onStart =
-        !type.length && !features.length && !style.length && price[0] === 0 && price[1] === 100;
+        !type.length &&
+        !features.length &&
+        !style.length &&
+        price[0] === 0 &&
+        price[1] === 100;
 
       if (onStart) {
         state.filteredLocations = state.locations;
       } else {
         const locations = state.locations;
 
-        const filteredStyles = locations.filter((location) => style.includes(location.style));
+        const filteredStyles = locations.filter((location) =>
+          style.includes(location.style)
+        );
 
         const filteredFeatures = locations.filter((location) =>
           features.includes(location.features)
@@ -85,10 +104,17 @@ const locationsSlice = createSlice({
 
         if (type.includes(all)) filteredType = state.locations;
         else {
-          filteredType = locations.filter((location) => type.includes(location.type));
+          filteredType = locations.filter((location) =>
+            type.includes(location.type)
+          );
         }
 
-        const arrOfFilterArr = [filteredFeatures, filteredPrice, filteredStyles, filteredType];
+        const arrOfFilterArr = [
+          filteredFeatures,
+          filteredPrice,
+          filteredStyles,
+          filteredType,
+        ];
 
         let arrayOfIds: Array<number> = [];
         let numOfFilters = 0;
@@ -124,7 +150,9 @@ const locationsSlice = createSlice({
           return null;
         });
 
-        const filteredLocations = locations.filter((location) => filteredIds.includes(location.id));
+        const filteredLocations = locations.filter((location) =>
+          filteredIds.includes(location.id)
+        );
 
         state.filteredLocations = filteredLocations;
       }
@@ -135,14 +163,18 @@ const locationsSlice = createSlice({
     onCardClick(state, action: PayloadAction<number>) {
       const id = action.payload;
 
-      if (id === state.showLocation.id && state.showLocation.show === true)
-        state.showLocation.show = false;
-      else if (id !== state.showLocation.id) {
-        const [{ latitude, longitude }] = state.locations.filter((location) => location.id === id);
+      let { showLocation } = state;
+
+      if (id === showLocation.id && showLocation.show === true)
+        showLocation.show = false;
+      else if (id !== showLocation.id) {
+        const [{ latitude, longitude }] = state.locations.filter(
+          (location) => location.id === id
+        );
 
         state.showLocation = { lat: latitude, lng: longitude, show: true, id };
-      } else if (id === state.showLocation.id && state.showLocation.show === false) {
-        state.showLocation.show = true;
+      } else if (id === showLocation.id && showLocation.show === false) {
+        showLocation.show = true;
       }
     },
   },
@@ -150,4 +182,5 @@ const locationsSlice = createSlice({
 
 export const { inputInteraction, onFiltersChange, onPriceChange, onCardClick } =
   locationsSlice.actions;
+
 export default locationsSlice.reducer;

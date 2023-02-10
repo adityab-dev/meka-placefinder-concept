@@ -19,7 +19,11 @@ function App() {
 
   return (
     <main className="app-container">
-      <div className={`sidebar-container ${toShow ? "sidebar-container-small" : null}`}>
+      <div
+        className={`sidebar-container ${
+          toShow ? "sidebar-container-small" : null
+        }`}
+      >
         <Sidebar />
       </div>
       <div className="filters-container">
@@ -28,7 +32,6 @@ function App() {
       <div className="property-contianer">
         <PropertyList />
       </div>
-      {/* <RangeInput /> */}
     </main>
   );
 }
